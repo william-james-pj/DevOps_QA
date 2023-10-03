@@ -52,4 +52,17 @@ public class AlunoTests {
 		assertEquals(aluno.getMatriculas().get(0).getStatus(), MatriculaStatus.REPROVADO);
 		assertEquals(aluno.getMatriculas().get(0).isPodeFazerSub(), true);
 	}
+	
+	@Test
+	public void deveFazerNadaSePassarUmCursoInvalido() {
+		Aluno aluno = new Aluno(887, "Thiago");
+		Curso curso = new Curso(1, "Botanica");
+		Curso curso2 = new Curso(2, "Botanica 2");
+		
+		aluno.inscreverCurso(curso);
+		aluno.finalizarCurso(3, curso2);
+		
+		assertEquals(aluno.getQtdCursosDisponivel(), 0);
+		assertEquals(aluno.getMatriculas().get(0).getStatus(), MatriculaStatus.CURSANDO);
+	}
 }
